@@ -5,9 +5,9 @@ def buildJar() {
 
 def buildImage() {
     echo "building the docker image..."
-    withCredentials([usernamePassword(credentials: 'jenkin-server-credentials', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+    withCredentials([usernamePassword(credentialsId: 'jenkin-server-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
         sh 'docker build -t fmstyles/demo-app:jma-2.0 .'
-        sh 'echo $PASSWORD | docker login -u $USERNAME --password-stdin'
+        sh 'echo $PASS | docker login -u $USER --password-stdin'
         sh 'docker push fmstyles/demo-app:jma-2.0'
     }
 }
