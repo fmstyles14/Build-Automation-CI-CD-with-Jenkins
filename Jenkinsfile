@@ -28,7 +28,7 @@ pipeline {
                 script {
                    buildImage 'fmstyles/demo-app:jma-3.1'
                    dockerLogin()
-                   buildPush 'fmstyles/demo-app:jma-3.1'
+                   dockerPush 'fmstyles/demo-app:jma-3.1'
                 }
             }
         }
