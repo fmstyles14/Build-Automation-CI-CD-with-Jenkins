@@ -18,7 +18,7 @@ pipeline {
         stage("build jar") {
             steps {
                 script {
-            buildJar 'fmstyles/demo-app:jma-3.1'
+            buildJar ()
                 }
             }
         }
