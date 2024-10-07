@@ -1,5 +1,10 @@
 #!/user/bin/env groovy
-@Library('jenkins-shared-library')
+// @Library('jenkins-shared-library') NOTE: When active 'jenkins-shared-library' need to be created/define in jenkins global shared >system>Global Trusted Pipeline Libraries
+library identifier: 'jenkins-shared-library@master', retriever:modernSCM(
+    [$class:'GitSCMSource',
+    remote: 'https://github.com/fmstyles14/jenkins-shared-library.git',
+    credentialsId:'jenkinsCred'])
+
 def gv
 
 pipeline {   
