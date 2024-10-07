@@ -18,7 +18,7 @@ pipeline {
         stage("build jar") {
             steps {
                 script {
-            buildJar'fmstyles/demo-app:jma-3.1'
+            buildJar 'fmstyles/demo-app:jma-3.1'
                 }
             }
         }
@@ -26,7 +26,7 @@ pipeline {
         stage("build image") {
             steps {
                 script {
-                   buildImage'fmstyles/demo-app:jma-3.1'
+                   buildImage 'fmstyles/demo-app:jma-3.1'
                 }
             }
         }
