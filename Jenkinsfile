@@ -23,10 +23,12 @@ pipeline {
             }
         }
 
-        stage("build image") {
+        stage("build and push image") {
             steps {
                 script {
                    buildImage 'fmstyles/demo-app:jma-3.1'
+                   dockerLogin()
+                   buildPush 'fmstyles/demo-app:jma-3.1'
                 }
             }
         }
