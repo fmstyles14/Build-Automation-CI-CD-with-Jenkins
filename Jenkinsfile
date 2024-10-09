@@ -13,7 +13,6 @@ pipeline {
         maven 'maven-3.9.9'
     }
     stages {
-            
         stage("init") {
             steps {
                 script {
@@ -21,22 +20,10 @@ pipeline {
                 }
             }
         }
-        stage("increment version") {
-                        steps {
-                            script {
-                                echo ' incrementing app version....'
-                                sh 'mvn build-helper:parse-version versions:set-DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion} versions:commit'
-                                  def matcher = readFile('pom.xml') =~ '<version>(.+)</version>'
-                                  def version = matcher[0] [1]
-                                  env.IMAGE_NAME = "$version-$BUILD_NUMBER"
-                            }
-                        }
-                    }
         stage("build jar") {
             steps {
                 script {
             buildJar ()
-            sh 'mvn clean package'
                 }
             }
         }
@@ -44,9 +31,9 @@ pipeline {
         stage("build and push image") {
             steps {
                 script {
-                   buildImage "fmstyles/demo-app:${IMAGE_NAME}"
+                   buildImage 'fmstyles/demo-app:jma-3.1'
                    dockerLogin()
-                   dockerPush "fmstyles/demo-app:${IMAGE_NAME}"
+                   dockerPush 'fmstyles/demo-app:jma-3.1'
                 }
             }
         }
